@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import './App.css';
 import MapBackground from './component/MapBackground';
 import Card from './component/Card';
 import InputIP from './component/InputIP';
 import OutputIP from './component/OutputIP';
+import config from './config.json';
 
 function App() {
   const [data, setData] = useState('');
-  const [iPAddress, setIPAddress] = useState("XXX.XXX.XXX.XXX");
-  const [location, setLocation] = useState("X LAND, X COUNTRY XXXXX");
-  const [timezone, setTimezone] = useState("UTC - XX:XX");
-  const [isp, setIsp] = useState("XXXXXXXX");
+  const [iPAddress, setIPAddress] = useState("");
+  const [location, setLocation] = useState("");
+  const [timezone, setTimezone] = useState("");
+  const [isp, setIsp] = useState("");
 
   const saveLocationDataHandler = (locationData) => {
     setData(locationData);
@@ -29,6 +30,30 @@ function App() {
     // Set ISP
     setIsp(locationData.isp);
   }
+
+  useEffect(() => {
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => initialAddress(data))
+      .catch(error => console.log(error))
+  }, []);
+
+  function initialAddress(initialData){
+    const api_url = "https://geo.ipify.org/api/v2/country?apiKey=" + config.api_key + "&ipAddress=" + initialData.ip;
+
+    async function getapi(url) {
+      // Storing response
+      const response = await fetch(url);
+  
+      // Storing data in form of JSON
+      let data = await response.json();
+      // setLocationData(data); //Save to useState
+      console.log("Data : "+data);
+      saveLocationDataHandler(data); //Don't use the useState data, it has a delay when transfering the data to App.js
+    }
+    getapi(api_url);
+  }
+ 
 
   return (
     <div className="App">

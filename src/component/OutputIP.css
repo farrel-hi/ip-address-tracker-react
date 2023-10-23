@@ -29,8 +29,10 @@
 
   .category{
     margin: 0;
+    font-size: 10px;
   }
   .value{
     margin-bottom: 20px;
+    font-size: 18px;
   }
 }

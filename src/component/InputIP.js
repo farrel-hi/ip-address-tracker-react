@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import submitBtn from '../images/icon-arrow.svg'
+import submitBtn from '../images/icon-arrow.svg';
 import './InputIP.css';
-import config from "../config";
+import config from "../config.json";
 
 
 function InputIP(props) {
@@ -65,7 +65,6 @@ function InputIP(props) {
 
       // Function to get IP Location Data
       async function getapi(url) {
-
         // Storing response
         const response = await fetch(url);
 
@@ -75,8 +74,6 @@ function InputIP(props) {
         console.log("Data : "+data);
         props.onSaveLocationData(data); //Don't use the useState data, it has a delay when transfering the data to App.js
       }
-
-      // Activating the function
       getapi(api_url);
     }
     else {
