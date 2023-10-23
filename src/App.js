@@ -12,6 +12,8 @@ function App() {
   const [location, setLocation] = useState("");
   const [timezone, setTimezone] = useState("");
   const [isp, setIsp] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState("");
 
   const saveLocationDataHandler = (locationData) => {
     setData(locationData);
@@ -25,10 +27,16 @@ function App() {
     setLocation(locationData.location.region + ", " + locationData.location.country);
 
     // Set Timezone
-    setTimezone(locationData.location.timezone);
+    setTimezone("UTC "+locationData.location.timezone);
 
     // Set ISP
     setIsp(locationData.isp);
+
+    // Set Longitude
+    setLongitude(locationData.location.lng);
+
+    // Set Latitude
+    setLatitude(locationData.location.lat);
   }
 
   useEffect(() => {
@@ -39,7 +47,7 @@ function App() {
   }, []);
 
   function initialAddress(initialData){
-    const api_url = "https://geo.ipify.org/api/v2/country?apiKey=" + config.api_key + "&ipAddress=" + initialData.ip;
+    const api_url = "https://geo.ipify.org/api/v2/country,city,vpn?apiKey=" + config.api_key + "&ipAddress=" + initialData.ip;
 
     async function getapi(url) {
       // Storing response
@@ -52,12 +60,17 @@ function App() {
       saveLocationDataHandler(data); //Don't use the useState data, it has a delay when transfering the data to App.js
     }
     getapi(api_url);
+
   }
  
 
   return (
     <div className="App">
-      <MapBackground />
+      <MapBackground 
+        lng={longitude}
+        lat={latitude}
+        ip={iPAddress}
+      />
       <div className='Main-Content'>
         <h1 className='page-title'>IP Address Tracker</h1>
         <InputIP

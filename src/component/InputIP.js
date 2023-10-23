@@ -61,7 +61,7 @@ function InputIP(props) {
     event.preventDefault();
     if (isValid(inputValue) == 1) {
       const api_key = config.api_key;
-      const api_url = "https://geo.ipify.org/api/v2/country?apiKey=" + api_key + "&ipAddress=" + inputValue;
+      const api_url = "https://geo.ipify.org/api/v2/country,city,vpn?apiKey=" + api_key + "&ipAddress=" + inputValue;
 
       // Function to get IP Location Data
       async function getapi(url) {
