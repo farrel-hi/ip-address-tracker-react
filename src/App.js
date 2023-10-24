@@ -16,6 +16,9 @@ function App() {
   const [latitude, setLatitude] = useState("");
 
   const saveLocationDataHandler = (locationData) => {
+    
+    console.log("Longitude: " + locationData.location.lng + ", Data Type: " + typeof(locationData.location.lng));
+    console.log("Latittued: " + locationData.location.lat + ", Data Type: " + typeof(locationData.location.lat));
     setData(locationData);
 
     console.log(locationData);
