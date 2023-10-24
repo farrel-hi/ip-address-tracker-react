@@ -30,8 +30,11 @@
   background-color: hsl(0, 0%, 17%);
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1024px) {
   .input-form{
     width: 90%;  
+  }
+  .ip-input{
+    font-size: 10px;
   }
 }

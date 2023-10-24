@@ -35,7 +35,7 @@
   height: 100%; 
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1024px) {
   .pattern-bg{
     height: 40%;
   }

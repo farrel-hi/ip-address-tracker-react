@@ -9,7 +9,7 @@
   align-items:center;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1024px) {
   .card{
     padding-top: 20px;
     width: 90%;
